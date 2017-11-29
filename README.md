@@ -8,6 +8,8 @@ with the following changes:
 - Opus upgraded to 1.2.1
   - including ARM Neon and Intel SSE support
 - extended encoder API
+  - specify [profile](https://opus-codec.org/docs/opus_api-1.2/group__opus__encoder.html#gaa89264fd93c9da70362a0c9b96b9ca88)
+  - set bitrate and complexity
 - errors converted to exceptions
 
 ## Usage

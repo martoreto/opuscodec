@@ -9,7 +9,11 @@ public class OpusEncoder {
 
     public static final int OPUS_COMPLEXITY_MAX = 10;
 
-    private native int nativeInitEncoder(int samplingRate, int numberOfChannels);
+    public static final int OPUS_APPLICATION_VOIP                = 2048;
+    public static final int OPUS_APPLICATION_AUDIO               = 2049;
+    public static final int OPUS_APPLICATION_RESTRICTED_LOWDELAY = 2051;
+
+    private native int nativeInitEncoder(int samplingRate, int numberOfChannels, int application);
     private native int nativeSetBitrate(int bitrate);
     private native int nativeSetComplexity(int complexity);
     private native int nativeEncodeShorts(short[] in, int frames, byte[] out);
@@ -20,8 +24,8 @@ public class OpusEncoder {
         System.loadLibrary("senz");
     }
 
-    public void init(int sampleRate, int channels) {
-        OpusError.throwIfError(this.nativeInitEncoder(sampleRate, channels));
+    public void init(int sampleRate, int channels, int application) {
+        OpusError.throwIfError(this.nativeInitEncoder(sampleRate, channels, application));
     }
 
     public void setBitrate(int bitrate) {

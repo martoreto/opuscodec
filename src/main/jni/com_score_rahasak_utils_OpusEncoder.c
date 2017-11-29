@@ -2,14 +2,14 @@
 #include "opus/include/opus.h"
 #include <malloc.h>
 
-JNIEXPORT jint JNICALL Java_com_score_rahasak_utils_OpusEncoder_nativeInitEncoder (JNIEnv *env, jobject obj, jint samplingRate, jint numberOfChannels)
+JNIEXPORT jint JNICALL Java_com_score_rahasak_utils_OpusEncoder_nativeInitEncoder (JNIEnv *env, jobject obj, jint samplingRate, jint numberOfChannels, jint application)
 {
 	int error;
 	int size;
 
 	size = opus_encoder_get_size(1);
 	OpusEncoder* enc = malloc(size);
-	error = opus_encoder_init(enc, samplingRate, numberOfChannels, OPUS_APPLICATION_AUDIO);
+	error = opus_encoder_init(enc, samplingRate, numberOfChannels, application);
 
 	if (error) {
 		free(enc);

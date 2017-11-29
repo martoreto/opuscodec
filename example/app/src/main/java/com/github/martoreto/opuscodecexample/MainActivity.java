@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
             // init opus encoder
             OpusEncoder encoder = new OpusEncoder();
-            encoder.init(SAMPLE_RATE, NUM_CHANNELS);
+            encoder.init(SAMPLE_RATE, NUM_CHANNELS, OpusEncoder.OPUS_APPLICATION_VOIP);
 
             // init audio track
             AudioTrack track = new AudioTrack(AudioManager.STREAM_SYSTEM,

@@ -7,7 +7,7 @@ extern "C" {
 #endif
 
 JNIEXPORT jint JNICALL Java_com_score_rahasak_utils_OpusEncoder_nativeInitEncoder
-  (JNIEnv *, jobject, jint, jint);
+  (JNIEnv *, jobject, jint, jint, jint);
 
 JNIEXPORT jint JNICALL
 Java_com_score_rahasak_utils_OpusEncoder_nativeSetBitrate(JNIEnv *env, jobject instance,
