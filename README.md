@@ -14,4 +14,21 @@ with the following changes:
 
 ## Usage
 
-See [example app](example/), specifically [MainActivity.java](example/app/src/main/java/com/github/martoreto/opuscodecexample/MainActivity.java).
+Add this to your main _build.gradle_:
+```gradle
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+}
+```
+
+and this to your app's _build.gradle_:
+
+```gradle
+dependencies {
+    compile 'com.github.martoreto:opuscodec:v1.2.1.1'
+}
+```
+
+and see [example app](example/), specifically [MainActivity.java](example/app/src/main/java/com/github/martoreto/opuscodecexample/MainActivity.java) for usage examples.
