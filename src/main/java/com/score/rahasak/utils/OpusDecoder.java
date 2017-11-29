@@ -5,7 +5,8 @@ public class OpusDecoder {
     private long address;
 
     private native int nativeInitDecoder(int samplingRate, int numberOfChannels);
-    private native int nativeDecodeBytes(byte[] in, short[] out, int frames);
+    private native int nativeDecodeShorts(byte[] in, short[] out, int frames);
+    private native int nativeDecodeBytes(byte[] in, byte[] out, int frames);
     private native boolean nativeReleaseDecoder();
 
     static {
@@ -18,6 +19,10 @@ public class OpusDecoder {
     }
 
     public int decode(byte[] encodedBuffer, short[] buffer, int frames) {
+        return OpusError.throwIfError(this.nativeDecodeShorts(encodedBuffer, buffer, frames));
+    }
+
+    public int decode(byte[] encodedBuffer, byte[] buffer, int frames) {
         return OpusError.throwIfError(this.nativeDecodeBytes(encodedBuffer, buffer, frames));
     }
 

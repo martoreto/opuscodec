@@ -90,7 +90,3 @@ JNIEXPORT jboolean JNICALL Java_com_score_rahasak_utils_OpusEncoder_nativeReleas
 	(*env)->SetLongField(env, obj, fid, (jlong)NULL);
     return 1;
 }
-
-
-
-

@@ -22,7 +22,7 @@ JNIEXPORT jint JNICALL Java_com_score_rahasak_utils_OpusDecoder_nativeInitDecode
 	return error;
 }
 
-JNIEXPORT jint JNICALL Java_com_score_rahasak_utils_OpusDecoder_nativeDecodeBytes (JNIEnv *env, jobject obj, jbyteArray in, jshortArray out, jint frames)
+JNIEXPORT jint JNICALL Java_com_score_rahasak_utils_OpusDecoder_nativeDecodeShorts (JNIEnv *env, jobject obj, jbyteArray in, jshortArray out, jint frames)
 {
     jclass cls = (*env)->GetObjectClass(env, obj);
     jfieldID fid = (*env)->GetFieldID(env, cls, "address", "J");
@@ -30,14 +30,32 @@ JNIEXPORT jint JNICALL Java_com_score_rahasak_utils_OpusDecoder_nativeDecodeByte
 
     jint inputArraySize = (*env)->GetArrayLength(env, in);
 
-	jbyte* encodedData = (*env)->GetByteArrayElements(env, in, 0);
-	jshort* decodedData = (*env)->GetShortArrayElements(env, out, 0);
-	int decodedDataArraySize = opus_decode(dec, (const unsigned char *) encodedData, inputArraySize,
+    jbyte* encodedData = (*env)->GetByteArrayElements(env, in, 0);
+    jshort* decodedData = (*env)->GetShortArrayElements(env, out, 0);
+    int samples = opus_decode(dec, (const unsigned char *) encodedData, inputArraySize,
                                            decodedData, frames, 0);
-	(*env)->ReleaseByteArrayElements(env,in,encodedData,JNI_ABORT);
-	(*env)->ReleaseShortArrayElements(env,out,decodedData,0);
+    (*env)->ReleaseByteArrayElements(env,in,encodedData,JNI_ABORT);
+    (*env)->ReleaseShortArrayElements(env,out,decodedData,0);
 
-	return decodedDataArraySize;
+    return samples;
+}
+
+JNIEXPORT jint JNICALL Java_com_score_rahasak_utils_OpusDecoder_nativeDecodeBytes (JNIEnv *env, jobject obj, jbyteArray in, jbyteArray out, jint frames)
+{
+    jclass cls = (*env)->GetObjectClass(env, obj);
+    jfieldID fid = (*env)->GetFieldID(env, cls, "address", "J");
+    OpusDecoder* dec = (OpusDecoder*)((*env)->GetLongField(env, obj, fid));
+
+    jint inputArraySize = (*env)->GetArrayLength(env, in);
+
+    jbyte* encodedData = (*env)->GetByteArrayElements(env, in, 0);
+    jbyte* decodedData = (*env)->GetByteArrayElements(env, out, 0);
+    int samples = opus_decode(dec, (const unsigned char *) encodedData, inputArraySize,
+                                           (opus_int16 *) decodedData, frames, 0);
+    (*env)->ReleaseByteArrayElements(env,in,encodedData,JNI_ABORT);
+    (*env)->ReleaseByteArrayElements(env,out,decodedData,0);
+
+    return samples;
 }
 
 JNIEXPORT jboolean JNICALL Java_com_score_rahasak_utils_OpusDecoder_nativeReleaseDecoder (JNIEnv *env, jobject obj)

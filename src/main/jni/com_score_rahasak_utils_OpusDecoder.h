@@ -7,27 +7,16 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-/*
- * Class:     com_score_rahasak_utils_OpusDecoder
- * Method:    nativeInitDecoder
- * Signature: (II)I
- */
+
 JNIEXPORT jint JNICALL Java_com_score_rahasak_utils_OpusDecoder_nativeInitDecoder
   (JNIEnv *, jobject, jint, jint);
 
-/*
- * Class:     com_score_rahasak_utils_OpusDecoder
- * Method:    nativeDecodeBytes
- * Signature: ([B[SI)I
- */
-JNIEXPORT jint JNICALL Java_com_score_rahasak_utils_OpusDecoder_nativeDecodeBytes
-  (JNIEnv *, jobject, jbyteArray, jshortArray, jint);
+JNIEXPORT jint JNICALL Java_com_score_rahasak_utils_OpusDecoder_nativeDecodeShorts
+        (JNIEnv *, jobject, jbyteArray, jshortArray, jint);
 
-/*
- * Class:     com_score_rahasak_utils_OpusDecoder
- * Method:    nativeReleaseDecoder
- * Signature: ()Z
- */
+JNIEXPORT jint JNICALL Java_com_score_rahasak_utils_OpusDecoder_nativeDecodeBytes
+        (JNIEnv *, jobject, jbyteArray, jbyteArray, jint);
+
 JNIEXPORT jboolean JNICALL Java_com_score_rahasak_utils_OpusDecoder_nativeReleaseDecoder
   (JNIEnv *, jobject);
 
