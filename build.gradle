@@ -1,4 +1,19 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        google()
+    }
+    dependencies {
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+        classpath 'com.android.tools.build:gradle:3.0.1'
+    }
+}
+
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.martoreto'
 
 android {
     compileSdkVersion 25
@@ -30,6 +45,10 @@ android {
     }
 }
 
+repositories {
+    google()
+}
+
 dependencies {
-    implementation 'com.android.support:support-annotations:27.0.1'
+    implementation 'com.android.support:support-annotations:27.0.2'
 }
