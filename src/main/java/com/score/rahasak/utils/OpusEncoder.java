@@ -1,5 +1,11 @@
 package com.score.rahasak.utils;
 
+import android.support.annotation.IntDef;
+import android.support.annotation.IntRange;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 public class OpusEncoder {
     // Native pointer to OpusEncoder.
     private long address;
@@ -9,13 +15,19 @@ public class OpusEncoder {
 
     public static final int OPUS_COMPLEXITY_MAX = 10;
 
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({OPUS_APPLICATION_VOIP, OPUS_APPLICATION_AUDIO, OPUS_APPLICATION_RESTRICTED_LOWDELAY})
+    public @interface ApplicationType {}
+
     public static final int OPUS_APPLICATION_VOIP                = 2048;
     public static final int OPUS_APPLICATION_AUDIO               = 2049;
     public static final int OPUS_APPLICATION_RESTRICTED_LOWDELAY = 2051;
 
-    private native int nativeInitEncoder(int samplingRate, int numberOfChannels, int application);
+    private native int nativeInitEncoder(@Annotations.SamplingRate int samplingRate,
+                                         @Annotations.NumberOfChannels int numberOfChannels,
+                                         @ApplicationType int application);
     private native int nativeSetBitrate(int bitrate);
-    private native int nativeSetComplexity(int complexity);
+    private native int nativeSetComplexity(@IntRange(from=0, to=10) int complexity);
     private native int nativeEncodeShorts(short[] in, int frames, byte[] out);
     private native int nativeEncodeBytes(byte[] in, int frames, byte[] out);
     private native boolean nativeReleaseEncoder();

@@ -12,7 +12,8 @@ public class OpusDecoder {
         System.loadLibrary("senz");
     }
 
-    public void init(int sampleRate, int channels) {
+    public void init(@Annotations.SamplingRate int sampleRate,
+                     @Annotations.NumberOfChannels int channels) {
         OpusError.throwIfError(this.nativeInitDecoder(sampleRate, channels));
     }
 
