@@ -28,7 +28,7 @@ android {
                 // (at least for the default floating point implementation) and ARM64 supports
                 // also armeabi-v7a binaries natively, so let's use those, which should be more
                 // efficient.
-                abiFilters "armeabi-v7a", "x86", "x86_64"
+                abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
             }
         }
     }
