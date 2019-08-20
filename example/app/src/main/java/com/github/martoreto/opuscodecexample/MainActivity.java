@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
             encoder.init(SAMPLE_RATE, NUM_CHANNELS, OpusEncoder.OPUS_APPLICATION_VOIP);
 
             // init audio track
-            AudioTrack track = new AudioTrack(AudioManager.STREAM_SYSTEM,
+            AudioTrack track = new AudioTrack(AudioManager.STREAM_VOICE_CALL,
                     SAMPLE_RATE,
                     NUM_CHANNELS == 1 ? AudioFormat.CHANNEL_OUT_MONO : AudioFormat.CHANNEL_OUT_STEREO,
                     AudioFormat.ENCODING_PCM_16BIT,
