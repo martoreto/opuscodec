@@ -1,26 +1,29 @@
 buildscript {
     repositories {
+        google()
         jcenter()
         mavenCentral()
-        google()
+        maven {
+            url "https://jitpack.io"
+        }
     }
     dependencies {
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.4.2'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
     }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group='com.github.martoreto'
+group = 'com.github.martoreto'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 29
+
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 25
+        targetSdkVersion 29
         consumerProguardFiles 'proguard-rules.pro'
         externalNativeBuild {
             ndkBuild {
@@ -47,8 +50,9 @@ android {
 
 repositories {
     google()
+    jcenter()
 }
 
 dependencies {
-    implementation 'com.android.support:support-annotations:27.0.2'
+    implementation 'androidx.annotation:annotation:1.1.0'
 }
